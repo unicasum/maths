@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ember.js • TodoMVC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="maths.css">
+    <link rel="stylesheet" href="./font-awesome-4.2.0/css/font-awesome.min.css">
+  </head>
+  <body>
+
+  <script>
+    function myFunction() {
+      document.getElementById("frm1").submit();
+    }
+
+    function check(a) {
+     if ( a.toString().length < sum.toString().length ) {
+      switch ( a ) {
+        case 1: {
+          document.total.inp_10er.focus();
+          break;
+        }
+
+        case 10: {
+          document.total.inp_100er.focus();
+          break;
+        }
+
+        case 100: {
+          document.total.inp_1000er.focus();
+          break;
+        }
+
+        case 1000: {
+          document.total.inp_10000er.focus();
+          break;
+        }
+
+        case 10000: {
+          document.total.inp_100000er.focus();
+          break;
+        }
+
+        case 100000: {
+          document.total.inp_1000000er.focus();
+          break;
+        }
+
+        case 1000000: {
+          document.total.inp_10000000er.focus();
+          break;
+        }
+
+        case 10000000: {
+          document.total.inp_100000000er.focus();
+          break;
+        }
+
+        case 100000000: {
+          document.total.inp_1000000000er.focus();
+          break;
+        }
+
+        case 1000000000: {
+          document.total.inp_100000000000er.focus();
+          break;
+        }
+
+        default: {
+          document.total.inp_1er.focus();
+          break;
+        }
+      }
+     } else {
+       var elem = document.getElementById('totalID').elements;
+       var str = "";
+
+       for(var i = 0; i < elem.length; i++) {
+            str += elem[i].value;
+
+          var idx = Math.pow(10,(elem.length-1)-i);
+          if ( chars[i] == elem[i].value ) {
+            document.getElementById('outp_' + idx + 'er').innerHTML = '<i class="fa fa-smile-o" style="color:green"></i>';
+          } else {
+            document.getElementById('outp_' + idx + 'er').innerHTML = '<i class="fa fa-frown-o" style="color:red"></i>';
+          }
+        } 
+        console.log('input: |' + str + '|');
+        console.log('sum:   |' + sum + '|');
+     }
+    }
+
+
+    function randomBetween(a,b) {
+      a = a || 0;
+      b = b || 10000;
+
+      if ( a > b ) {
+        c = b;
+        b = a;
+        a = c;
+      }
+
+      r=Math.floor(Math.random()*Math.pow(10,b.toString().length));
+      return ((r%((b+1)-a))+a);
+    }
+
+   document.write("<br><br><br>");
+    var header = [ "HM", "ZM", "M", "HT", "ZT", "T", "H", "Z", "E" ];
+    var minCount = 5;
+    var maxCount = 5;
+
+    var summand = [];
+    var chars = [];
+    var len = 0;
+
+    //var header = [ "HT", "ZT", "T", "H", "Z", "E" ];
+
+    //count = (( randomBetween(minCount, header.length)) % maxCount ) + minCount;
+    count =  randomBetween(minCount, maxCount);
+
+    for ( i = 0; i < count; i ++ ) {
+      summand[i] = randomBetween(0,Math.pow(10,randomBetween(0,4)))
+    }
+
+    var sum = summand.reduce(function(pv, cv) { return pv + cv; }, 0);
+
+    document.write("<h1>Queen/King</h1>");
+    document.write('<section id="summand"><table border="0">');
+
+    for ( i = ( header.length - ( sum.toString().length +1 )); i < header.length; i ++ ) {
+      document.write("<th>" + header[i] + "</th>");
+    }
+
+    for ( i = 0; i < summand.length; i ++ ) {
+
+      len = summand[i].toString().length;
+      chars = summand[i].toString().split("");
+
+      document.write("<tr>");
+
+      if (( i == ( summand.length - 1 ))) {
+        document.write("<td>+</td>");
+      } else {
+        document.write("<td>&nbsp;</td>");
+      }
+
+      for ( j = 0; j < ( sum.toString().length - len ); j ++ ) {
+        document.write("<td>&nbsp;</td>");
+      }
+
+      for ( j = 0; j < len; j ++ ) {
+        document.write("<td>" + chars[j] + "</td>");
+      }
+
+      document.write("</tr>");
+    }
+
+    document.write('</table></section>');
+    document.write('<section id="sum1">');
+    document.write('<form id="totalID" name="total"><table border="0">');
+
+    chars = sum.toString().split("");
+
+    document.write("<tr>");
+
+    for ( i = sum.toString().length - 1; i >= 0; i -- ) {
+        if ( i == (sum.toString().length - 1 )) {
+          document.write("<td>&nbsp;</td>");
+        }
+
+        document.write('<td>' + 
+          '<input type="text" name="inp_' +
+          Math.pow(10,i) +
+          'er' +
+          '" maxlength="1" size="1" onKeyUp="check(' +
+          Math.pow(10,i) +
+          ')"></input>' +
+          '</td>');
+          //'<i class="fa fa-smile-o"></i><i class="fa fa-frown-o"></i><i class="fa fa-meh-o"></i>' +
+    }
+
+    document.write("</tr>");
+    document.write('</table></form>');
+    document.write('<table border="0">');
+
+    chars = sum.toString().split("");
+
+    document.write("<tr>");
+
+    for ( i = sum.toString().length - 1; i >= 0; i -- ) {
+        if ( i == (sum.toString().length - 1 )) {
+          //document.write('<td><input id="doReloadID" value="R" type="button" onClick="window.location.reload()"></input></td>');
+          document.write('<td><button id="doReloadID" value="R" type="button" onClick="window.location.reload()"><i class="fa fa-refresh"></i></button></td>');
+          //document.getElementById('doReloadID').value = '<i class=\\\\"fa fa-refresh\\\\"></i>';
+        }
+
+        document.write(
+          '<td id="outp_' +
+          Math.pow(10,i) +
+          'er' +
+          '">' +
+          '<i class="fa fa-meh-o"></i>' +
+          '</td>');
+          //'<i class="fa fa-smile-o"></i><i class="fa fa-frown-o"></i><i class="fa fa-meh-o"></i>' +
+    }
+
+    document.write("</tr>");
+    document.write('</table>');
+    document.write('</section>');
+    document.total.inp_1er.focus();
+
+  </script>
+  <script type="text/x-handlebars" data-template-name="todos"></script>
+<!--
+
+    <section id="todoapp">
+      <header id="header">
+        <h1>todos</h1>
+        <input type="text" id="new-todo" placeholder="What needs to be done?"/>
+      </header>
+
+      <section id="main">
+        <ul id="todo-list">
+          <li class="completed">
+            <input type="checkbox" class="toggle">
+            <label>Learn Ember.js</label><button class="destroy"></button>
+          </li>
+          <li>
+            <input type="checkbox" class="toggle">
+            <label>...</label><button class="destroy"></button>
+          </li>
+          <li>
+            <input type="checkbox" class="toggle">
+            <label>Profit!</label><button class="destroy"></button>
+          </li>
+        </ul>
+
+        <input type="checkbox" id="toggle-all">
+      </section>
+
+      <footer id="footer">
+        <span id="todo-count">
+          <strong>2</strong> todos left
+        </span>
+        <ul id="filters">
+          <li>
+            <a href="all" class="selected">All</a>
+          </li>
+          <li>
+            <a href="active">Active</a>
+          </li>
+          <li>
+            <a href="completed">Completed</a>
+          </li>
+        </ul>
+
+        <button id="clear-completed">
+          Clear completed (1)
+        </button>
+      </footer>
+    </section>
+
+    <footer id="info">
+      <p>Double-click to edit a todo</p>
+    </footer>
+  </script>
+-->
+    <script src="js/libs/jquery-1.11.1.min.js"></script>
+    <script src="js/libs/handlebars-v2.0.0.js"></script>
+    <script src="js/libs/ember.js"></script>
+    <script src="js/libs/ember-data.js"></script>
+
+<!--
+  <script src="js/application.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/models/todo.js"></script>
+-->
+  <script src="js/randomBetween.js"></script>
+  </body>
+</html>
