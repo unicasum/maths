@@ -75,6 +75,7 @@
      } else {
        var elem = document.getElementById('totalID').elements;
        var str = "";
+       var errcnt = 0;
 
        for(var i = 0; i < elem.length; i++) {
             str += elem[i].value;
@@ -84,8 +85,14 @@
             document.getElementById('outp_' + idx + 'er').innerHTML = '<i class="fa fa-smile-o" style="color:green"></i>';
           } else {
             document.getElementById('outp_' + idx + 'er').innerHTML = '<i class="fa fa-frown-o" style="color:red"></i>';
+            errcnt ++;
           }
-        } 
+       } 
+
+       if ( 0 == errcnt ) {
+          document.getElementById('doReloadID').style.visibility="visible";
+       }
+       
         console.log('input: |' + str + '|');
         console.log('sum:   |' + sum + '|');
      }
@@ -192,7 +199,8 @@
     for ( i = sum.toString().length - 1; i >= 0; i -- ) {
         if ( i == (sum.toString().length - 1 )) {
           //document.write('<td><input id="doReloadID" value="R" type="button" onClick="window.location.reload()"></input></td>');
-          document.write('<td><button id="doReloadID" value="R" type="button" onClick="window.location.reload()"><i class="fa fa-refresh"></i></button></td>');
+          document.write('<td><button id="doReloadID" type="button" onClick="window.location.reload()"><i class="fa fa-refresh"></i></button></td>');
+          document.getElementById('doReloadID').style.visibility="hidden";
           //document.getElementById('doReloadID').value = '<i class=\\\\"fa fa-refresh\\\\"></i>';
         }
 
