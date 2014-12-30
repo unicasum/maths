@@ -15,7 +15,7 @@
     }
 
     function check(a) {
-     if ( a.toString().length < sum.toString().length ) {
+     if (( a.toString().length < sum.toString().length ) && ( false == doCheck )) {
       switch ( a ) {
         case 1: {
           document.total.inp_10er.focus();
@@ -77,6 +77,8 @@
        var str = "";
        var errcnt = 0;
 
+       doCheck = true;
+
        for(var i = 0; i < elem.length; i++) {
             str += elem[i].value;
 
@@ -121,6 +123,7 @@
     var summand = [];
     var chars = [];
     var len = 0;
+    var doCheck = false;
 
     //var header = [ "HT", "ZT", "T", "H", "Z", "E" ];
 
@@ -198,10 +201,9 @@
 
     for ( i = sum.toString().length - 1; i >= 0; i -- ) {
         if ( i == (sum.toString().length - 1 )) {
-          //document.write('<td><input id="doReloadID" value="R" type="button" onClick="window.location.reload()"></input></td>');
           document.write('<td><button id="doReloadID" type="button" onClick="window.location.reload()"><i class="fa fa-refresh"></i></button></td>');
           document.getElementById('doReloadID').style.visibility="hidden";
-          //document.getElementById('doReloadID').value = '<i class=\\\\"fa fa-refresh\\\\"></i>';
+          document.getElementById('doReloadID').style.color="blue";
         }
 
         document.write(
