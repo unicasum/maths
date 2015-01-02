@@ -116,6 +116,7 @@
     }
 
    document.write("<br><br><br>");
+    var header = [ "HM", "ZM", "M", "HT", "ZT", "T", "H", "Z", "E" ];
 
     var level = [ 
       "First Steps",
@@ -137,26 +138,27 @@
     var chars = [];
     var len = 0;
     var doCheck = false;
-    var header = [ "HM", "ZM", "M", "HT", "ZT", "T", "H", "Z", "E" ];
 
+    //var header = [ "HT", "ZT", "T", "H", "Z", "E" ];
+
+    //count = (( randomBetween(minCount, header.length)) % maxCount ) + minCount;
     count =  randomBetween(minCount, maxCount);
 
     for ( i = 0; i < count; i ++ ) {
-      summand[i] = randomBetween(0,Math.pow(10,randomBetween(0,(header.length - 2))))
+      summand[i] = randomBetween(0,Math.pow(10,randomBetween(0,4)))
     }
 
     var sum = summand.reduce(function(pv, cv) { return pv + cv; }, 0);
 
-/*
-    document.write('<select id="levelID">');
+    document.write('<div id="main">');
+    document.write('<select>');
 
     for ( i = 0; i < level.length; i ++ ) {
-      document.write('<option class="myLevel" value="' + i + '">' + level[i] + '</option>');
+      document.write('<option class="level" value="' + i + '">' + level[i] + '</option>');
     }
 
     document.write('</select>');
-*/
-    document.write('<h1 style="color:blue; align:center;">Maths Queen/Maths King</h1>');
+
     document.write('<section id="summand"><table border="0">');
 
     for ( i = ( header.length - ( sum.toString().length +1 )); i < header.length; i ++ ) {
@@ -189,9 +191,7 @@
 
     document.write('</table></section>');
     document.write('<section id="sum1">');
-    //document.write('<form id="totalID" name="total"><table border="0">');
-    document.write('<form id="totalID" name="total">');
-    document.write('<table border="0">');
+    document.write('<form id="totalID" name="total"><table border="0">');
 
     chars = sum.toString().split("");
 
@@ -215,6 +215,7 @@
           Math.pow(10,i) +
           ')"></input>' +
           '</td>');
+          //'<i class="fa fa-smile-o"></i><i class="fa fa-frown-o"></i><i class="fa fa-meh-o"></i>' +
     }
 
     document.write("</tr>");
@@ -245,7 +246,7 @@
           Math.pow(10,i) +
           'er' +
           '">' +
-          '<i class="fa fa-meh-o" style="color:orange"></i>' +
+          '<i class="fa fa-meh-o"></i>' +
           '</td>');
           //'<i class="fa fa-smile-o"></i><i class="fa fa-frown-o"></i><i class="fa fa-meh-o"></i>' +
     }
@@ -258,11 +259,70 @@
 
   </script>
   <script type="text/x-handlebars" data-template-name="todos"></script>
+<!--
+
+    <section id="todoapp">
+      <header id="header">
+        <h1>todos</h1>
+        <input type="text" id="new-todo" placeholder="What needs to be done?"/>
+      </header>
+
+      <section id="main">
+        <ul id="todo-list">
+          <li class="completed">
+            <input type="checkbox" class="toggle">
+            <label>Learn Ember.js</label><button class="destroy"></button>
+          </li>
+          <li>
+            <input type="checkbox" class="toggle">
+            <label>...</label><button class="destroy"></button>
+          </li>
+          <li>
+            <input type="checkbox" class="toggle">
+            <label>Profit!</label><button class="destroy"></button>
+          </li>
+        </ul>
+
+        <input type="checkbox" id="toggle-all">
+      </section>
+
+      <footer id="footer">
+        <span id="todo-count">
+          <strong>2</strong> todos left
+        </span>
+        <ul id="filters">
+          <li>
+            <a href="all" class="selected">All</a>
+          </li>
+          <li>
+            <a href="active">Active</a>
+          </li>
+          <li>
+            <a href="completed">Completed</a>
+          </li>
+        </ul>
+
+        <button id="clear-completed">
+          Clear completed (1)
+        </button>
+      </footer>
+    </section>
+
+    <footer id="info">
+      <p>Double-click to edit a todo</p>
+    </footer>
+  </script>
+-->
     <script src="js/libs/jquery-1.11.1.min.js"></script>
     <script src="js/libs/handlebars-v2.0.0.js"></script>
     <script src="js/libs/ember.js"></script>
     <script src="js/libs/ember-data.js"></script>
 
+<!--
+  <script src="js/application.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/models/todo.js"></script>
+-->
   <script src="js/randomBetween.js"></script>
   </body>
 </html>
