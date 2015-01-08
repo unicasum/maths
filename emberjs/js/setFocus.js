@@ -1,5 +1,6 @@
-function check(a) {
+function setFocus(a) {
   if (( a.toString().length < sum.toString().length ) && ( false == doCheck )) {
+    console.log('this: |' + this.form + '|');
     switch ( a ) {
       case 1: {
         document.total.inp_10.focus();
