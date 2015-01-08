@@ -1,6 +1,5 @@
 function setFocus(a) {
   if (( a.toString().length < sum.toString().length ) && ( false == doCheck )) {
-    console.log('this: |' + this.form + '|');
     switch ( a ) {
       case 1: {
         document.total.inp_10.focus();
@@ -78,9 +77,10 @@ function setFocus(a) {
 
      if ( 0 == errcnt ) {
        document.getElementById('doReloadID').style.visibility="visible";
+       document.getElementById('doReloadID').focus();
      }
 
-     console.log('input: |' + str + '|');
-     console.log('sum:   |' + sum + '|');
+     //console.log('input: |' + str + '|');
+     //console.log('sum:   |' + sum + '|');
    }
  }

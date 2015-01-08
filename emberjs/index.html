@@ -39,14 +39,14 @@ window.location.getParameter = function(key) {
       { "name":"First Steps",  "min":0,       "max":9,       "summands":2 },
       { "name":"Beginner",     "min":1,       "max":99,      "summands":2 },
       { "name":"Elementary",   "min":10,      "max":999,     "summands":2 },
-      { "name":"Intermediate", "min":100,     "max":9999,    "summands":2 },
+      { "name":"Intermediate", "min":10,      "max":9999,    "summands":2 },
       { "name":"Advanced",     "min":1,       "max":99999,   "summands":3 },
       { "name":"Professional", "min":10,      "max":99999,   "summands":3 },
       { "name":"Expert",       "min":100,     "max":99999,   "summands":3 },
-      { "name":"Master",       "min":100,     "max":9,       "summands":4 },
-      { "name":"Maths King",   "min":100,     "max":999999,  "summands":5 },
-      { "name":"Maths Queen",  "min":100,     "max":999999,  "summands":5 },
-      { "name":"Crazy",        "min":10000,   "max":9999999, "summands":7 }
+      { "name":"Master",       "min":1000,    "max":99999,   "summands":4 },
+      { "name":"Maths King",   "min":10,      "max":999999,  "summands":5 },
+      { "name":"Maths Queen",  "min":10,      "max":999999,  "summands":5 },
+      { "name":"Crazy",        "min":10,      "max":9999999, "summands":5 }
     ];
 
     var summand = [];
@@ -58,7 +58,7 @@ window.location.getParameter = function(key) {
 
   </script>
 
-    <select name='elements' id='elements' onChange='window.location="file:./index.html?elements=" + this.selectedIndex;'>
+    <select name='elements' id='elements' onChange='window.location="./index.html?elements=" + this.selectedIndex;'>
 
   <script>
     for ( i = 0; i < levels.length; i ++ ) {
