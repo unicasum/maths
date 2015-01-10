@@ -36,17 +36,17 @@ window.location.getParameter = function(key) {
     var header = [ "HM", "ZM", "M", "HT", "ZT", "T", "H", "Z", "E" ];
 
     var levels = [ 
-      { "name":"First Steps",  "min":0,       "max":9,       "summands":2 },
-      { "name":"Beginner",     "min":1,       "max":99,      "summands":2 },
-      { "name":"Elementary",   "min":10,      "max":999,     "summands":2 },
-      { "name":"Intermediate", "min":10,      "max":9999,    "summands":2 },
-      { "name":"Advanced",     "min":1,       "max":99999,   "summands":3 },
-      { "name":"Professional", "min":10,      "max":99999,   "summands":3 },
-      { "name":"Expert",       "min":100,     "max":99999,   "summands":3 },
-      { "name":"Master",       "min":1000,    "max":99999,   "summands":4 },
-      { "name":"Maths King",   "min":10,      "max":999999,  "summands":5 },
-      { "name":"Maths Queen",  "min":10,      "max":999999,  "summands":5 },
-      { "name":"Crazy",        "min":10,      "max":9999999, "summands":5 }
+      { "name":"First Steps",  "min":0,    "max":9,        "summands":2 },
+      { "name":"Beginner",     "min":1,    "max":99,       "summands":2 },
+      { "name":"Elementary",   "min":10,   "max":99,       "summands":2 },
+      { "name":"Intermediate", "min":100,  "max":999,      "summands":2 },
+      { "name":"Advanced",     "min":1,    "max":99,       "summands":3 },
+      { "name":"Professional", "min":10,   "max":999,      "summands":3 },
+      { "name":"Expert",       "min":100,  "max":999,      "summands":3 },
+      { "name":"Master",       "min":1000, "max":99999,    "summands":4 },
+      { "name":"Maths King",   "min":100,  "max":999999,   "summands":5 },
+      { "name":"Maths Queen",  "min":100,  "max":999999,   "summands":5 },
+      { "name":"Crazy",        "min":1000, "max":99999999, "summands":5 }
     ];
 
     var summand = [];
@@ -58,27 +58,30 @@ window.location.getParameter = function(key) {
 
   </script>
 
-    <select name='elements' id='elements' onChange='window.location="./index.html?elements=" + this.selectedIndex;'>
+    <div class="text"><br>Level:&nbsp;<select class='level' name='elements' id='elements' onChange='window.location="./index.html?elements=" + this.selectedIndex;'>
 
   <script>
     for ( i = 0; i < levels.length; i ++ ) {
       document.write('<option class="level" value="' + i + '">' + levels[i].name + '</option>');
     }
 
-    document.write('</select>');
-    document.write('</form>');
+    document.write('</select></div>');
+    document.write('</form><br><br><br><br>');
 
     var mySelection = document.getElementById('elements');
     var levelSelected = window.location.getParameter('elements') || 0;
     mySelection[levelSelected].selected = true;
 
     for ( i = 0; i < levels[levelSelected].summands; i ++ ) {
-      summand[i] = randomBetween(levels[levelSelected].min,levels[levelSelected].max);
+      //summand[i] = randomBetween(levels[levelSelected].min,levels[levelSelected].max);
+      summand[i] = randomBetween(levels[levelSelected].min,
+                                 Math.abs(Math.pow(10,randomBetween(levels[levelSelected].min.toString().length,
+                                                           levels[levelSelected].max.toString().length))-1));
     }
 
-    var sum = summand.reduce(function(pv, cv) { return pv + cv; }, 0);
+    
 
-    document.write('<h1 style="color:blue;">' + levels[levelSelected].name + '</h1>');
+    var sum = summand.reduce(function(pv, cv) { return pv + cv; }, 0);
 
     document.write('<section id="summand"><table border="0">');
 
@@ -175,6 +178,12 @@ window.location.getParameter = function(key) {
     document.total.inp_1.focus();
 
   </script>
+
+  <br><br>
+  <a href="mailto:maths@unicasum.net">maths@unicasum.net</a>
+  <br>
+  <a target="_blank" href="http://www.unicasum.net?lang=en">Visit unicasum.net</a>
+
   <script type="text/x-handlebars" data-template-name="todos"></script>
   <script src="js/libs/jquery-1.11.1.min.js"></script>
   <script src="js/libs/handlebars-v2.0.0.js"></script>
