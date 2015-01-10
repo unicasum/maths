@@ -1,53 +1,143 @@
 function setFocus(a) {
-  if (( a.toString().length < sum.toString().length ) && ( false == doCheck )) {
+  //if (( a.toString().length < sum.toString().length ) && ( false == doCheck )) {
     switch ( a ) {
       case 1: {
-        document.total.inp_10.focus();
+        if ( isDigit(document.total.inp_1.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_10.focus();
+          }
+        } else {
+          document.total.inp_1.value = null;
+          if ( a.toString().length < sum.toString().length ) {
+            document.total.inp_1.focus();
+          }
+        }
         break;
       }
 
       case 10: {
-        document.total.inp_100.focus();
+        if ( isDigit(document.total.inp_10.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_100.focus();
+          }
+        } else {
+          document.total.inp_10.value = null;
+          if ( a.toString().length < sum.toString().length ) {
+            document.total.inp_10.focus();
+          }
+        }
         break;
       }
 
       case 100: {
-        document.total.inp_1000.focus();
+        if ( isDigit(document.total.inp_100.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_1000.focus();
+          }
+        } else {
+          document.total.inp_100.value = null;
+          if ( a.toString().length < sum.toString().length ) {
+            document.total.inp_100.focus();
+          }
+        }
         break;
       }
 
       case 1000: {
-        document.total.inp_10000.focus();
+        if ( isDigit(document.total.inp_1000.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_10000.focus();
+          }
+        } else {
+          document.total.inp_1000.value = null;
+          if ( a.toString().length < sum.toString().length ) {
+            document.total.inp_1000.focus();
+          }
+        }
         break;
       }
 
       case 10000: {
-        document.total.inp_100000.focus();
+        if ( isDigit(document.total.inp_10000.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_100000.focus();
+          }
+        } else {
+          document.total.inp_10000.value = null;
+          if ( a.toString().length < sum.toString().length ) {
+            document.total.inp_10000.focus();
+          }
+        }
         break;
       }
 
       case 100000: {
-        document.total.inp_1000000.focus();
+        if ( isDigit(document.total.inp_100000.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_1000000.focus();
+          }
+        } else {
+          document.total.inp_100000.value = null;
+            if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_100000.focus();
+          }
+        }
         break;
       }
 
       case 1000000: {
-        document.total.inp_10000000.focus();
+        if ( isDigit(document.total.inp_1000000.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_10000000.focus();
+          }
+        } else {
+          document.total.inp_1000000.value = null;
+            if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_1000000.focus();
+          }
+        }
         break;
       }
 
       case 10000000: {
-        document.total.inp_100000000.focus();
+        if ( isDigit(document.total.inp_10000000.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_100000000.focus();
+          }
+        } else {
+          document.total.inp_10000000.value = null;
+            if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_10000000.focus();
+          }
+        }
         break;
       }
 
       case 100000000: {
-        document.total.inp_1000000000.focus();
+        if ( isDigit(document.total.inp_100000000.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_1000000000.focus();
+          }
+        } else {
+          document.total.inp_100000000.value = null;
+          if ( a.toString().length < sum.toString().length ) {
+            document.total.inp_100000000.focus();
+          }
+        }
         break;
       }
 
       case 1000000000: {
-        document.total.inp_100000000000.focus();
+        if ( isDigit(document.total.inp_1000000000.value) ) {
+          if ( a.toString().length < sum.toString().length ) {
+          document.total.inp_10000000000.focus();
+          }
+        } else {
+          document.total.inp_1000000000.value = null;
+          if ( a.toString().length < sum.toString().length ) {
+            document.total.inp_1000000000.focus();
+          }
+        }
         break;
       }
 
@@ -56,7 +146,9 @@ function setFocus(a) {
         break;
       }
     }
-  } else {
+  // } else {
+  if ( a.toString().length == sum.toString().length ) {
+  //if (( a.toString().length < sum.toString().length ) || ( true == doCheck )) {
      var elem = document.getElementById('totalID').elements;
      var str = "";
      var errcnt = 0;

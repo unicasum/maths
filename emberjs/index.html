@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./font-awesome-4.2.0/css/font-awesome.min.css">
 
     <script type="text/javascript" src="js/randomBetween.js"></script>
+    <script type="text/javascript" src="js/isDigit.js"></script>
     <script type="text/javascript" src="js/setFocus.js"></script>
   </head>
   <body>
@@ -33,20 +34,20 @@ window.location.getParameter = function(key) {
 
     return this.queryStringParams[key];
 }
-    var header = [ "HM", "ZM", "M", "HT", "ZT", "T", "H", "Z", "E" ];
+    var header = [ "&nbsp;", "HM", "ZM", "M", "HT", "ZT", "T", "H", "Z", "E" ];
 
     var levels = [ 
-      { "name":"First Steps",  "min":0,    "max":9,        "summands":2 },
-      { "name":"Beginner",     "min":1,    "max":99,       "summands":2 },
-      { "name":"Elementary",   "min":10,   "max":99,       "summands":2 },
-      { "name":"Intermediate", "min":100,  "max":999,      "summands":2 },
-      { "name":"Advanced",     "min":1,    "max":99,       "summands":3 },
-      { "name":"Professional", "min":10,   "max":999,      "summands":3 },
-      { "name":"Expert",       "min":100,  "max":999,      "summands":3 },
-      { "name":"Master",       "min":1000, "max":99999,    "summands":4 },
-      { "name":"Maths King",   "min":100,  "max":999999,   "summands":5 },
-      { "name":"Maths Queen",  "min":100,  "max":999999,   "summands":5 },
-      { "name":"Crazy",        "min":1000, "max":99999999, "summands":5 }
+      { "name":"First Steps",      "min":0,    "max":9,       "summands":2 },
+      { "name":"Beginner",         "min":1,    "max":99,      "summands":2 },
+      { "name":"Elementary",       "min":10,   "max":99,      "summands":2 },
+      { "name":"Intermediate",     "min":100,  "max":999,     "summands":2 },
+      { "name":"Advanced",         "min":1,    "max":99,      "summands":3 },
+      { "name":"Professional",     "min":10,   "max":999,     "summands":3 },
+      { "name":"Master",           "min":100,  "max":999,     "summands":3 },
+      { "name":"Expert",           "min":1000, "max":99999,   "summands":4 },
+      { "name":"Maths Queen/King", "min":100,  "max":999999,  "summands":5 },
+      { "name":"Crazy",            "min":1000, "max":99999999, "summands":5 },
+      { "name":"Random",           "min":0,    "max":99999999, "summands":randomBetween(2,6) }
     ];
 
     var summand = [];
@@ -180,7 +181,7 @@ window.location.getParameter = function(key) {
   </script>
 
   <br><br>
-  <a href="mailto:maths@unicasum.net">maths@unicasum.net</a>
+  <a href="mailto:maths@unicasum.net">mailto:maths@unicasum.net</a>
   <br>
   <a target="_blank" href="http://www.unicasum.net?lang=en">Visit unicasum.net</a>
 
