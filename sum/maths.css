@@ -1,0 +1,69 @@
+#summand {
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4em;
+}
+
+#summand td {
+    font: 42px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #CFCFCF;
+    text-align: center;
+    width: 1.2em;
+}
+
+#summand th {
+    font: 21px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #8a9da8;
+    width: 2.0em;
+}
+
+#sum1 {
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4em;
+}
+
+/*
+#sum1 td {
+    font: 42px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #CFCFCF;
+    text-align: center;
+    width: 1.2em;
+}
+*/
+
+#summand input {
+    font: 42px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #8DE28D;
+    text-align: center;
+    width: 1.0em;
+}
+
+.text {
+    font: 36px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: blue;
+    font-weight:bold;
+    height: 1.4em;
+}
+
+.level {
+    font: 24px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #E7E7E7;
+    color: blue;
+    font-weight:bold;
+    vertical-align: middle;
+    height: 1.4em;
+}
+
+
+.td_hr {
+    font: 2px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #000000;
+    text-align: center;
+    height: 0.1em;
+}
+
+button {
+    font: 42px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #8DE28D;
+    text-align: center;
+    width: 1.0em;
+}

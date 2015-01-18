@@ -4,13 +4,12 @@
     <meta charset="utf-8">
     <!-- title>Ember.js • TodoMVC</title -->
     <title>unicasum.net mahts sum</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="maths.css">
-    <link rel="stylesheet" href="./font-awesome-4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/maths.css">
+    <link rel="stylesheet" href="../font-awesome-4.2.0/css/font-awesome.min.css">
 
-    <script type="text/javascript" src="js/randomBetween.js"></script>
-    <script type="text/javascript" src="js/isDigit.js"></script>
-    <script type="text/javascript" src="js/setFocus.js"></script>
+    <script type="text/javascript" src="../js/randomBetween.js"></script>
+    <script type="text/javascript" src="../js/isDigit.js"></script>
+    <script type="text/javascript" src="../js/setFocus.js"></script>
   </head>
   <body>
   <script>
@@ -37,8 +36,8 @@ window.location.getParameter = function(key) {
     var header = [ "&nbsp;", "HM", "ZM", "M", "HT", "ZT", "T", "H", "Z", "E" ];
 
     var levels = [ 
-      { "name":"First Steps",      "min":0,    "max":9,       "summands":2 },
-      { "name":"Beginner",         "min":1,    "max":99,      "summands":2 },
+      { "name":"First Steps",      "min":100,    "max":999,       "summands":1 }/*,
+      { "name":"Beginner",         "min":100,    "max":999,      "summands":2 },
       { "name":"Elementary",       "min":10,   "max":99,      "summands":2 },
       { "name":"Intermediate",     "min":100,  "max":999,     "summands":2 },
       { "name":"Advanced",         "min":1,    "max":99,      "summands":3 },
@@ -47,14 +46,17 @@ window.location.getParameter = function(key) {
       { "name":"Expert",           "min":1000, "max":99999,   "summands":4 },
       { "name":"Maths Queen/King", "min":100,  "max":999999,  "summands":5 },
       { "name":"Crazy",            "min":1000, "max":99999999, "summands":5 },
-      { "name":"Random",           "min":0,    "max":99999999, "summands":randomBetween(2,6) }
+      { "name":"Random",           "min":0,    "max":99999999, "summands":randomBetween(2,6) }*/
     ];
 
+    var doCheck = false
     var summand = [];
     var chars = [];
     var len = 0;
-    var doCheck = false;
+    var inpList = [];
+    var inpListIdx = 1;
     
+    document.write('<div id="main" name="main" align="center">');
     document.write('<form id="levelID" name="level">');
 
   </script>
@@ -70,7 +72,8 @@ window.location.getParameter = function(key) {
     document.write('</form><br><br><br><br>');
 
     var mySelection = document.getElementById('elements');
-    var levelSelected = window.location.getParameter('elements') || 0;
+    //var levelSelected = window.location.getParameter('elements') || 0;
+    var levelSelected = 0;
     mySelection[levelSelected].selected = true;
 
     for ( i = 0; i < levels[levelSelected].summands; i ++ ) {
@@ -82,13 +85,19 @@ window.location.getParameter = function(key) {
 
     
 
-    var sum = summand.reduce(function(pv, cv) { return pv + cv; }, 0);
+    //var sum = summand.reduce(function(pv, cv) { return pv + cv; }, 0);
+    var mul = randomBetween(2,4);
+    var sum = summand[0] * mul;
 
     document.write('<section id="summand"><table border="0">');
+    ////document.write("<th>" + '&nbsp' + "</th>");
 
-    for ( i = ( header.length - ( sum.toString().length +1 )); i < header.length; i ++ ) {
+    //for ( i = ( header.length - ( sum.toString().length +1 )); i < header.length; i ++ ) {
+    for ( i = ( header.length - ( sum.toString().length )); i < header.length; i ++ ) {
       document.write("<th>" + header[i] + "</th>");
     }
+    document.write("<th>" + '&nbsp' + "</th>");
+    document.write("<th>" + 'E' + "</th>");
 
     for ( i = 0; i < summand.length; i ++ ) {
 
@@ -98,9 +107,9 @@ window.location.getParameter = function(key) {
       document.write("<tr>");
 
       if (( i == ( summand.length - 1 ))) {
-        document.write("<td>+</td>");
+        ; ////document.write("<td>&nbsp</td>");
       } else {
-        document.write("<td>&nbsp;</td>");
+        ; ////document.write("<td>&nbsp;</td>");
       }
 
       for ( j = 0; j < ( sum.toString().length - len ); j ++ ) {
@@ -110,6 +119,9 @@ window.location.getParameter = function(key) {
       for ( j = 0; j < len; j ++ ) {
         document.write("<td>" + chars[j] + "</td>");
       }
+
+    document.write("<td>" + '<i class="fa fa-circle" style="font-size: 24px\;vertical-align: middle\;"></i>' + "</td>");
+    document.write("<td>" + mul + "</td>");
 
       document.write("</tr>");
     }
@@ -121,7 +133,8 @@ window.location.getParameter = function(key) {
     chars = sum.toString().split("");
 
     document.write("<tr>");
-    document.write('<td colspan="' + (sum.toString().length + 1 ) + '">');
+    ////document.write("<td>&nbsp;</td>");
+    document.write('<td colspan="' + (sum.toString().length + 2 ) + '">');
     document.write('<hr color="black">');
     document.write("</td>");
     document.write("</tr>");
@@ -129,17 +142,27 @@ window.location.getParameter = function(key) {
 
     for ( i = sum.toString().length - 1; i >= 0; i -- ) {
         if ( i == (sum.toString().length - 1 )) {
-          document.write("<td>&nbsp;</td>");
+          ; ////document.write("<td>&nbsp;</td>");
         }
 
+        //inpList[Math.pow(10,i)] = "inp_" + Math.pow(10,i) + "ID";
+        inpList[Math.pow(10,i)] = Math.pow(10,i);
+
+    console.log ( 'Math.pow(): |' + Math.pow(10,i) + '|' + i + '|' );
+
         document.write('<td>' + 
-          '<input type="text" name="inp_' +
+          '<input type="text" id="' +
           Math.pow(10,i) +
-          '" maxlength="1" size="1" onKeyUp="setFocus(' +
+          '" name="' +
           Math.pow(10,i) +
+          '" maxlength="1" size="1" onKeyUp="setFocusNew(' +
+          'this.id' +
           ')"></input>' +
           '</td>');
     }
+
+    document.write("<td>&nbsp;</td>");
+    document.write("<td>&nbsp;</td>");
 
     document.write("</tr>");
     document.write('</table></form>');
@@ -148,22 +171,27 @@ window.location.getParameter = function(key) {
     chars = sum.toString().split("");
 
     document.write('<tr class="td_hr">');
-    document.write('<td class="td_hr" colspan="' + (sum.toString().length + 1 ) + '">');
+    //// document.write("<td>&nbsp;</td>");
+    document.write('<td class="td_hr" colspan="' + (sum.toString().length) + '">');
     document.write('<hr color="black">');
     document.write('<hr color="black">');
     document.write("</td>");
+    document.write("<td>&nbsp;</td>");
+    document.write("<td>&nbsp;</td>");
     document.write("</tr>");
     document.write("<tr>");
 
     document.write("<tr>");
+    ////document.write("<td>&nbsp;</td>");
 
     for ( i = sum.toString().length - 1; i >= 0; i -- ) {
+/*
         if ( i == (sum.toString().length - 1 )) {
           document.write('<td><button id="doReloadID" type="button" onClick="window.location.reload()"><i class="fa fa-refresh"></i></button></td>');
           document.getElementById('doReloadID').style.visibility="hidden";
           document.getElementById('doReloadID').style.color="blue";
         }
-
+*/
         document.write(
           '<td id="outp_' +
           Math.pow(10,i) +
@@ -172,23 +200,47 @@ window.location.getParameter = function(key) {
           '</td>');
     }
 
+    document.write("<td>&nbsp;</td>");
+    document.write('<td><button id="doReloadID" type="button" onClick="window.location.reload()"><i class="fa fa-refresh"></i></button></td>');
+    document.getElementById('doReloadID').style.visibility="hidden";
+    document.getElementById('doReloadID').style.color="blue";
+
     document.write("</tr>");
     document.write('</table>');
     document.write('</section>');
     document.write('</dev>');
-    document.total.inp_1.focus();
 
   </script>
 
   <br><br>
-  <a href="mailto:maths@unicasum.net">mailto:maths@unicasum.net</a>
+  <!--table><tr>
+  <script>
+  for ( i = 0; i < 10; i++ ) {
+    //document.write('<button type="button" onclick="alert('Hello world!')">Click Me!</button>
+    //document.write('<td><button type="button" onclick="alert(\'Hello world\')">' + i + '</button></td>');
+    //action = 'document.getElementById(' + 'inpList[inpListIdx]' + ').value = ' + i + '\;';
+    action = 'setFocus(-1,\'' + i + '\')';
+
+    console.log ( 'action: |' + action + '|' );
+    document.write('<td><button type="button" id="button_' + i + 'ID" onclick="' + action + '">' + i + '</button></td>');
+  }
+
+  console.log ( 'inpList: |' + inpList + '|' );
+  console.log ( 'inpListIdx: |' + inpListIdx + '|' );
+  console.log ( 'inpList[inpListIdx]: |' + inpList[Math.pow(10,inpListIdx)] + '|' );
+  console.log ( 'document.getElementById(inpList[inpListIdx]).value: |' + document.getElementById(inpList[inpListIdx]) + '|' );
+
+  //document.total."1".focus();
+  </script>
+  </tr></table>
+  <br><br-->
+  <script>
+  document.getElementById("1").focus();
+  </script>
+  <a href="mailto:maths@unicasum.net">feedback: maths@unicasum.net</a>
   <br>
   <a target="_blank" href="http://www.unicasum.net?lang=en">Visit unicasum.net</a>
+  </div> <!-- end div - main -->
 
-  <script type="text/x-handlebars" data-template-name="todos"></script>
-  <script src="js/libs/jquery-1.11.1.min.js"></script>
-  <script src="js/libs/handlebars-v2.0.0.js"></script>
-  <script src="js/libs/ember.js"></script>
-  <script src="js/libs/ember-data.js"></script>
   </body>
 </html>
