@@ -13,7 +13,7 @@
   </head>
   <body>
   <script>
-window.location.getParameter = function(key) {
+  window.location.getParameter = function(key) {
     function parseParams() {
         var params = {},
             e,
@@ -32,11 +32,13 @@ window.location.getParameter = function(key) {
         this.queryStringParams = parseParams(); 
 
     return this.queryStringParams[key];
-}
+  }
     var header = [ "&nbsp;", "HM", "ZM", "M", "HT", "ZT", "T", "H", "Z", "E" ];
 
     var levels = [ 
-      { "name":"First Steps",      "min":100,    "max":999,       "summands":1 }/*,
+      { "name":"First Steps",      "min":100,    "max":999,       "summands":1, "minMul":2, "maxMul":3  },
+      { "name":"Beginner",      "min":100,    "max":999,       "summands":1, "minMul":2, "maxMul":4  },
+      { "name":"Elementary",      "min":100,    "max":999,       "summands":1, "minMul":2, "maxMul":6  } /*,
       { "name":"Beginner",         "min":100,    "max":999,      "summands":2 },
       { "name":"Elementary",       "min":10,   "max":99,      "summands":2 },
       { "name":"Intermediate",     "min":100,  "max":999,     "summands":2 },
@@ -53,10 +55,12 @@ window.location.getParameter = function(key) {
     var summand = [];
     var chars = [];
     var len = 0;
+    var inputId = "1";
     var inpList = [];
     var inpListIdx = 1;
     
     document.write('<div id="main" name="main" align="center">');
+    document.write('<h1>Multiply</h1>');
     document.write('<form id="levelID" name="level">');
 
   </script>
@@ -72,27 +76,21 @@ window.location.getParameter = function(key) {
     document.write('</form><br><br><br><br>');
 
     var mySelection = document.getElementById('elements');
-    //var levelSelected = window.location.getParameter('elements') || 0;
+    var levelSelected = window.location.getParameter('elements') || 0;
     var levelSelected = 0;
     mySelection[levelSelected].selected = true;
 
     for ( i = 0; i < levels[levelSelected].summands; i ++ ) {
-      //summand[i] = randomBetween(levels[levelSelected].min,levels[levelSelected].max);
       summand[i] = randomBetween(levels[levelSelected].min,
                                  Math.abs(Math.pow(10,randomBetween(levels[levelSelected].min.toString().length,
                                                            levels[levelSelected].max.toString().length))-1));
     }
 
-    
-
-    //var sum = summand.reduce(function(pv, cv) { return pv + cv; }, 0);
-    var mul = randomBetween(2,4);
+    var mul = randomBetween(levels[levelSelected].minMul,levels[levelSelected].maxMul);
     var sum = summand[0] * mul;
 
     document.write('<section id="summand"><table border="0">');
-    ////document.write("<th>" + '&nbsp' + "</th>");
 
-    //for ( i = ( header.length - ( sum.toString().length +1 )); i < header.length; i ++ ) {
     for ( i = ( header.length - ( sum.toString().length )); i < header.length; i ++ ) {
       document.write("<th>" + header[i] + "</th>");
     }
@@ -105,12 +103,6 @@ window.location.getParameter = function(key) {
       chars = summand[i].toString().split("");
 
       document.write("<tr>");
-
-      if (( i == ( summand.length - 1 ))) {
-        ; ////document.write("<td>&nbsp</td>");
-      } else {
-        ; ////document.write("<td>&nbsp;</td>");
-      }
 
       for ( j = 0; j < ( sum.toString().length - len ); j ++ ) {
         document.write("<td>&nbsp;</td>");
@@ -133,7 +125,6 @@ window.location.getParameter = function(key) {
     chars = sum.toString().split("");
 
     document.write("<tr>");
-    ////document.write("<td>&nbsp;</td>");
     document.write('<td colspan="' + (sum.toString().length + 2 ) + '">');
     document.write('<hr color="black">');
     document.write("</td>");
@@ -141,14 +132,9 @@ window.location.getParameter = function(key) {
     document.write("<tr>");
 
     for ( i = sum.toString().length - 1; i >= 0; i -- ) {
-        if ( i == (sum.toString().length - 1 )) {
-          ; ////document.write("<td>&nbsp;</td>");
-        }
+      inpList[Math.pow(10,i)] = Math.pow(10,i);
 
-        //inpList[Math.pow(10,i)] = "inp_" + Math.pow(10,i) + "ID";
-        inpList[Math.pow(10,i)] = Math.pow(10,i);
-
-    console.log ( 'Math.pow(): |' + Math.pow(10,i) + '|' + i + '|' );
+      console.log ( 'Math.pow(): |' + Math.pow(10,i) + '|' + i + '|' );
 
         document.write('<td>' + 
           '<input type="text" id="' +
@@ -171,7 +157,6 @@ window.location.getParameter = function(key) {
     chars = sum.toString().split("");
 
     document.write('<tr class="td_hr">');
-    //// document.write("<td>&nbsp;</td>");
     document.write('<td class="td_hr" colspan="' + (sum.toString().length) + '">');
     document.write('<hr color="black">');
     document.write('<hr color="black">');
@@ -182,16 +167,8 @@ window.location.getParameter = function(key) {
     document.write("<tr>");
 
     document.write("<tr>");
-    ////document.write("<td>&nbsp;</td>");
 
     for ( i = sum.toString().length - 1; i >= 0; i -- ) {
-/*
-        if ( i == (sum.toString().length - 1 )) {
-          document.write('<td><button id="doReloadID" type="button" onClick="window.location.reload()"><i class="fa fa-refresh"></i></button></td>');
-          document.getElementById('doReloadID').style.visibility="hidden";
-          document.getElementById('doReloadID').style.color="blue";
-        }
-*/
         document.write(
           '<td id="outp_' +
           Math.pow(10,i) +
@@ -213,27 +190,21 @@ window.location.getParameter = function(key) {
   </script>
 
   <br><br>
-  <!--table><tr>
+  <table><tr>
   <script>
   for ( i = 0; i < 10; i++ ) {
-    //document.write('<button type="button" onclick="alert('Hello world!')">Click Me!</button>
-    //document.write('<td><button type="button" onclick="alert(\'Hello world\')">' + i + '</button></td>');
-    //action = 'document.getElementById(' + 'inpList[inpListIdx]' + ').value = ' + i + '\;';
-    action = 'setFocus(-1,\'' + i + '\')';
+    action = 'setInputValue(this.id)';
 
     console.log ( 'action: |' + action + '|' );
-    document.write('<td><button type="button" id="button_' + i + 'ID" onclick="' + action + '">' + i + '</button></td>');
+    document.write('<td><button type="button" id="button_' + i + 'ID" value="' + i + '" onclick="' + action + '">' + i + '</button></td>');
+    if (4==i) {
+      document.write('</tr><tr>');
+    }
   }
 
-  console.log ( 'inpList: |' + inpList + '|' );
-  console.log ( 'inpListIdx: |' + inpListIdx + '|' );
-  console.log ( 'inpList[inpListIdx]: |' + inpList[Math.pow(10,inpListIdx)] + '|' );
-  console.log ( 'document.getElementById(inpList[inpListIdx]).value: |' + document.getElementById(inpList[inpListIdx]) + '|' );
-
-  //document.total."1".focus();
   </script>
   </tr></table>
-  <br><br-->
+  <br><br>
   <script>
   document.getElementById("1").focus();
   </script>

@@ -16,6 +16,7 @@ function checkCalculation(){
       errcnt ++;
       inpListIdx = Math.pow(10,j);
       myID = Math.pow(10,j);
+      inputId = myID;
       console.log ( 'myID: |' + myID + '|' );
       document.getElementById(myID).focus();
       document.getElementById(myID).select();
@@ -50,6 +51,14 @@ function setFocusNew(id){
     if ( 0 == checkCalculation()) {
       document.getElementById('doReloadID').style.visibility="visible";
       document.getElementById('doReloadID').focus();
+    } else {
+      newId=myID;
     }
   }
+  inputId=newId;
+}
+
+function setInputValue(id) {
+  document.getElementById(inputId).value = document.getElementById(id).value;
+  setFocusNew(inputId);
 }
