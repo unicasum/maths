@@ -1,18 +1,24 @@
 function checkCalculation(){
+  console.log('result: |' + result + '|');
+  console.log('result.length: |' + result.toString().length + '|');
   var errcnt = 0;
-  var elem = document.getElementById('totalID').elements;
   var str = "";
-  j = sum.toString().length - 1;
+  j = result.toString().length - 1;
 
-  for(var i = 0; i < elem.length; i++) {
-    str += elem[i].value;
+  for(var i = 0; i < result.toString().length; i++) {
+    inID = Math.pow(10,j);
+    str += document.getElementById(inID).value;
 
-    var idx = Math.pow(10,(elem.length-1)-i);
+    var idx = Math.pow(10,(result.toString().length-1)-i);
 
-    if ( chars[i] == elem[i].value ) {
-      document.getElementById('outp_' + idx).innerHTML = '<i class="fa fa-smile-o" style="color:green"></i>';
+    console.log ( 'idx:  |' + idx + '|' );
+
+    if ( chars[i] == document.getElementById(inID).value ) {
+      document.getElementById('outp_' + idx).innerHTML = '<i class="smile icon" style="color:green"></i>';
+      //document.getElementById('outp_' + idx).innerHTML = '<i style="color:green">+</i>';
     } else {
-      document.getElementById('outp_' + idx).innerHTML = '<i class="fa fa-frown-o" style="color:red"></i>';
+      document.getElementById('outp_' + idx).innerHTML = '<i class="frown icon" style="color:red"></i>';
+      //document.getElementById('outp_' + idx).innerHTML = '<i style="color:red">-</i>';
       errcnt ++;
       inpListIdx = Math.pow(10,j);
       myID = Math.pow(10,j);
@@ -22,12 +28,12 @@ function checkCalculation(){
       document.getElementById(myID).select();
     }
     j --;
-  } 
+  }
 
   return errcnt;
 }
 
-function setFocusNew(id){
+function setFocus(id){
   var newId = id || 0;
 
   // calculating new id for setting focus
@@ -38,18 +44,20 @@ function setFocusNew(id){
     document.getElementById(newId).value = '';
   }
 
-  if (sum.toString().length > id.length) {
+  if (result.toString().length > id.length) {
     //setting focus
     document.getElementById(newId).focus();
   } else {
     doCheck = true;
   }
 
-  if ((sum.toString().length <= id.length) || (doCheck)) {
+  if ((result.toString().length <= id.length) || (doCheck)) {
     //check calculation
 
     if ( 0 == checkCalculation()) {
       document.getElementById('doReloadID').style.visibility="visible";
+      //document.getElementById('doReloadID').style.disabled="false";
+      document.getElementById('doReloadID').disabled = "false";
       document.getElementById('doReloadID').focus();
     } else {
       newId=myID;
@@ -60,5 +68,5 @@ function setFocusNew(id){
 
 function setInputValue(id) {
   document.getElementById(inputId).value = document.getElementById(id).value;
-  setFocusNew(inputId);
+  setFocus(inputId);
 }

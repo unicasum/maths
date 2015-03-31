@@ -2,215 +2,53 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <!-- title>Ember.js • TodoMVC</title -->
-    <title>unicasum.net mahts sum</title>
+    <title>unicasum.net mahts mul</title>
     <link rel="stylesheet" href="../css/maths.css">
-    <link rel="stylesheet" href="../font-awesome-4.2.0/css/font-awesome.min.css">
+    <!-- link rel="stylesheet" type="text/css" href="../Semantic-UI-1.7.3/dist/semantic.css">
+    <link rel="stylesheet" href="../Semantic-UI-1.7.3/examples/kitchensink.css"-->
 
+    <script type="text/javascript" src="../js/getParameter.js"></script>
     <script type="text/javascript" src="../js/randomBetween.js"></script>
+    <script type="text/javascript" src="../js/globals.js"></script>
     <script type="text/javascript" src="../js/isDigit.js"></script>
     <script type="text/javascript" src="../js/setFocus.js"></script>
+    <script type="text/javascript" src="../js/writeHelper.js"></script>
   </head>
   <body>
-  <script>
-  window.location.getParameter = function(key) {
-    function parseParams() {
-        var params = {},
-            e,
-            a = /\+/g,  // Regex for replacing addition symbol with a space
-            r = /([^&=]+)=?([^&]*)/g,
-            d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-            q = window.location.search.substring(1);
+    <script>
+      var doCheck = false
+      var summand = [];
+      var chars = [];
+      var len = 0;
+      var inputId = "1";
+      var inpList = [];
+      var inpListIdx = 1;
 
-        while (e = r.exec(q))
-            params[d(e[1])] = d(e[2]);
+      writeTitle();
+      writeLevel();
 
-        return params;
-    };
+      var mySelection = document.getElementById('elements');
+      var levelSelected = window.location.getParameter('elements') || 0;
+      mySelection[levelSelected].selected = true;
 
-    if (!this.queryStringParams)
-        this.queryStringParams = parseParams(); 
-
-    return this.queryStringParams[key];
-  }
-    var header = [ "&nbsp;", "HM", "ZM", "M", "HT", "ZT", "T", "H", "Z", "E" ];
-
-    var levels = [ 
-      { "name":"First Steps",      "min":100,    "max":999,       "summands":1, "minMul":2, "maxMul":3  },
-      { "name":"Beginner",      "min":100,    "max":999,       "summands":1, "minMul":2, "maxMul":4  },
-      { "name":"Elementary",      "min":100,    "max":999,       "summands":1, "minMul":2, "maxMul":6  } /*,
-      { "name":"Beginner",         "min":100,    "max":999,      "summands":2 },
-      { "name":"Elementary",       "min":10,   "max":99,      "summands":2 },
-      { "name":"Intermediate",     "min":100,  "max":999,     "summands":2 },
-      { "name":"Advanced",         "min":1,    "max":99,      "summands":3 },
-      { "name":"Professional",     "min":10,   "max":999,     "summands":3 },
-      { "name":"Master",           "min":100,  "max":999,     "summands":3 },
-      { "name":"Expert",           "min":1000, "max":99999,   "summands":4 },
-      { "name":"Maths Queen/King", "min":100,  "max":999999,  "summands":5 },
-      { "name":"Crazy",            "min":1000, "max":99999999, "summands":5 },
-      { "name":"Random",           "min":0,    "max":99999999, "summands":randomBetween(2,6) }*/
-    ];
-
-    var doCheck = false
-    var summand = [];
-    var chars = [];
-    var len = 0;
-    var inputId = "1";
-    var inpList = [];
-    var inpListIdx = 1;
-    
-    document.write('<div id="main" name="main" align="center">');
-    document.write('<h1>Multiply</h1>');
-    document.write('<form id="levelID" name="level">');
-
-  </script>
-
-    <div class="text"><br>Level:&nbsp;<select class='level' name='elements' id='elements' onChange='window.location="./index.html?elements=" + this.selectedIndex;'>
-
-  <script>
-    for ( i = 0; i < levels.length; i ++ ) {
-      document.write('<option class="level" value="' + i + '">' + levels[i].name + '</option>');
-    }
-
-    document.write('</select></div>');
-    document.write('</form><br><br><br><br>');
-
-    var mySelection = document.getElementById('elements');
-    var levelSelected = window.location.getParameter('elements') || 0;
-    mySelection[levelSelected].selected = true;
-
-    for ( i = 0; i < levels[levelSelected].summands; i ++ ) {
-      summand[i] = randomBetween(levels[levelSelected].min,
-                                 Math.abs(Math.pow(10,randomBetween(levels[levelSelected].min.toString().length,
-                                                           levels[levelSelected].max.toString().length))-1));
-    }
-
-    var mul = randomBetween(levels[levelSelected].minMul,levels[levelSelected].maxMul);
-    var sum = summand[0] * mul;
-
-    document.write('<section id="summand"><table border="0">');
-
-    for ( i = ( header.length - ( sum.toString().length )); i < header.length; i ++ ) {
-      document.write("<th>" + header[i] + "</th>");
-    }
-    document.write("<th>" + '&nbsp' + "</th>");
-    document.write("<th>" + 'E' + "</th>");
-
-    for ( i = 0; i < summand.length; i ++ ) {
-
-      len = summand[i].toString().length;
-      chars = summand[i].toString().split("");
-
-      document.write("<tr>");
-
-      for ( j = 0; j < ( sum.toString().length - len ); j ++ ) {
-        document.write("<td>&nbsp;</td>");
+      for ( i = 0; i < levels[levelSelected].summands; i ++ ) {
+        summand[i] = randomBetween(levels[levelSelected].min,
+                                   Math.abs(Math.pow(10,randomBetween(levels[levelSelected].min.toString().length,
+                                                             levels[levelSelected].max.toString().length))-1));
       }
 
-      for ( j = 0; j < len; j ++ ) {
-        document.write("<td>" + chars[j] + "</td>");
-      }
+      var mul = randomBetween(levels[levelSelected].minMul,levels[levelSelected].maxMul);
+      var result = summand[0] * mul;
 
-    document.write("<td>" + '<i class="fa fa-circle" style="font-size: 24px\;vertical-align: middle\;"></i>' + "</td>");
-    document.write("<td>" + mul + "</td>");
+      writeTask();
+      //writeHr(1,cols[((result.toString().length + 1 + mul.toString().length))-1]);
 
-      document.write("</tr>");
-    }
+      chars = result.toString().split('');
+      //writeHr(2,cols[result.toString().length-1]);
+      chars = result.toString().split('');
 
-    document.write('</table>');
-    document.write('<form id="totalID" name="total">');
-    document.write('<table border="0">');
-
-    chars = sum.toString().split("");
-
-    document.write("<tr>");
-    document.write('<td colspan="' + (sum.toString().length + 2 ) + '">');
-    document.write('<hr color="black">');
-    document.write("</td>");
-    document.write("</tr>");
-    document.write("<tr>");
-
-    for ( i = sum.toString().length - 1; i >= 0; i -- ) {
-      inpList[Math.pow(10,i)] = Math.pow(10,i);
-
-      console.log ( 'Math.pow(): |' + Math.pow(10,i) + '|' + i + '|' );
-
-        document.write('<td>' + 
-          '<input type="text" id="' +
-          Math.pow(10,i) +
-          '" name="' +
-          Math.pow(10,i) +
-          '" maxlength="1" size="1" onKeyUp="setFocusNew(' +
-          'this.id' +
-          ')"></input>' +
-          '</td>');
-    }
-
-    document.write("<td>&nbsp;</td>");
-    document.write("<td>&nbsp;</td>");
-
-    document.write("</tr>");
-    document.write('</table></form>');
-    document.write('<table border="0">');
-
-    chars = sum.toString().split("");
-
-    document.write('<tr class="td_hr">');
-    document.write('<td class="td_hr" colspan="' + (sum.toString().length) + '">');
-    document.write('<hr color="black">');
-    document.write('<hr color="black">');
-    document.write("</td>");
-    document.write("<td>&nbsp;</td>");
-    document.write("<td>&nbsp;</td>");
-    document.write("</tr>");
-    document.write("<tr>");
-
-    document.write("<tr>");
-
-    for ( i = sum.toString().length - 1; i >= 0; i -- ) {
-        document.write(
-          '<td id="outp_' +
-          Math.pow(10,i) +
-          '">' +
-          '<i class="fa fa-meh-o" style="color:orange"></i>' +
-          '</td>');
-    }
-
-    document.write("<td>&nbsp;</td>");
-    document.write('<td><button id="doReloadID" type="button" onClick="window.location.reload()"><i class="fa fa-refresh"></i></button></td>');
-    document.getElementById('doReloadID').style.visibility="hidden";
-    document.getElementById('doReloadID').style.color="blue";
-
-    document.write("</tr>");
-    document.write('</table>');
-    document.write('</section>');
-    document.write('</dev>');
-
-  </script>
-
-  <br><br>
-  <table><tr>
-  <script>
-  for ( i = 0; i < 10; i++ ) {
-    action = 'setInputValue(this.id)';
-
-    console.log ( 'action: |' + action + '|' );
-    document.write('<td><button type="button" id="button_' + i + 'ID" value="' + i + '" onclick="' + action + '">' + i + '</button></td>');
-    if (4==i) {
-      document.write('</tr><tr>');
-    }
-  }
-
-  </script>
-  </tr></table>
-  <br><br>
-  <script>
-  document.getElementById("1").focus();
-  </script>
-  <a href="mailto:maths@unicasum.net">feedback: maths@unicasum.net</a>
-  <br>
-  <a target="_blank" href="http://www.unicasum.net?lang=en">Visit unicasum.net</a>
-  </div> <!-- end div - main -->
-
+      document.getElementById("1").focus();
+      document.getElementById('doReloadID').style.visibility="invisible";
+    </script>
   </body>
 </html>
